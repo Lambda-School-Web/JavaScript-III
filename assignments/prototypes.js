@@ -153,6 +153,12 @@ Hero.prototype.mortalStrike = function(damageDealt, target) {
     return `You can't attack while dead. Next time don't let your health points reach 0.`;
   }
 
+  if (target.healthPoints <= 0) {
+    return `You have already slained ${
+      target.name
+    }. You can stop attacking now.`;
+  }
+
   target.healthPoints = target.healthPoints - damageDealt;
   if (target.healthPoints > 0) {
     return `You have dealt ${damageDealt} damage points to ${
@@ -170,6 +176,11 @@ Villain.prototype.pyroBlast = function(damageDealt, target) {
     return `You can't attack while dead. Next time don't let your health points reach 0.`;
   }
 
+  if (target.healthPoints <= 0) {
+    return `You have already slained ${
+      target.name
+    }. You can stop attacking now.`;
+  }
   target.healthPoints = target.healthPoints - damageDealt;
   if (target.healthPoints > 0) {
     return `You have dealt ${damageDealt} damage points to ${
