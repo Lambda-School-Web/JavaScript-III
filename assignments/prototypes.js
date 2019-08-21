@@ -41,19 +41,19 @@
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
-const GameObject = function(goAttributes) {
-  this.createdAt = goAttributes.createdAt;
-  this.name = goAttributes.name;
-  this.dimensions = goAttributes.dimensions;
+const GameObject = function(attributes) {
+  this.createdAt = attributes.createdAt;
+  this.name = attributes.name;
+  this.dimensions = attributes.dimensions;
 };
 
 GameObject.prototype.destroy = function() {
   return `${this.name} was removed from the game.`;
 };
 
-const CharacterStats = function(csAttributes) {
-  GameObject.call(this, csAttributes);
-  this.healthPoints = csAttributes.healthPoints;
+const CharacterStats = function(attributes) {
+  GameObject.call(this, attributes);
+  this.healthPoints = attributes.healthPoints;
 };
 CharacterStats.prototype = Object.create(GameObject.prototype);
 
@@ -72,6 +72,12 @@ Humanoid.prototype = Object.create(CharacterStats.prototype);
 
 Humanoid.prototype.greet = function() {
   return `${this.name} offers a greeting in ${this.language}.`;
+};
+
+Humanoid.prototype.dmgCalc = function(atkPwr) {
+  min = Math.ceil(this.atkPwr - 5);
+  max = Math.floor(this.atkPwr + 5);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 const mage = new Humanoid({
@@ -131,11 +137,13 @@ console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.
 const Hero = function(attributes) {
   Humanoid.call(this, attributes);
+  this.atkPwr = attributes.atkPwr;
 };
 Hero.prototype = Object.create(Humanoid.prototype);
 
 const Villain = function(attributes) {
   Humanoid.call(this, attributes);
+  this.atkPwr = attributes.atkPwr;
 };
 Villain.prototype = Object.create(Humanoid.prototype);
 
@@ -173,11 +181,12 @@ const saurfang = new Hero({
     width: 2,
     height: 2
   },
-  healthPoints: 50,
+  healthPoints: 70,
   name: "Varok Saurfang",
   team: "Blackrock Clan",
   weapons: ["Arcanite Reaper"],
-  language: "Hordish"
+  language: "Hordish",
+  atkPwr: 10
 });
 
 const kaelthas = new Villain({
@@ -191,11 +200,16 @@ const kaelthas = new Villain({
   name: "Kael'thas Sunstrider",
   team: "Sunfury",
   weapons: ["Felo'melorn"],
-  language: "Elvish"
+  language: "Elvish",
+  atkPwr: 15
 });
 
-console.log(saurfang.mortalStrike(10, kaelthas));
-console.log(kaelthas.pyroBlast(15, saurfang));
-console.log(kaelthas.pyroBlast(15, saurfang));
-console.log(kaelthas.pyroBlast(15, saurfang));
-console.log(kaelthas.pyroBlast(15, saurfang));
+console.log(saurfang.mortalStrike(saurfang.dmgCalc(this.atkPwr), kaelthas));
+console.log(kaelthas.pyroBlast(kaelthas.dmgCalc(this.atkPwr), saurfang));
+console.log(saurfang.mortalStrike(saurfang.dmgCalc(this.atkPwr), kaelthas));
+console.log(kaelthas.pyroBlast(kaelthas.dmgCalc(this.atkPwr), saurfang));
+console.log(saurfang.mortalStrike(saurfang.dmgCalc(this.atkPwr), kaelthas));
+console.log(kaelthas.pyroBlast(kaelthas.dmgCalc(this.atkPwr), saurfang));
+console.log(saurfang.mortalStrike(saurfang.dmgCalc(this.atkPwr), kaelthas));
+console.log(kaelthas.pyroBlast(kaelthas.dmgCalc(this.atkPwr), saurfang));
+console.log(saurfang.mortalStrike(saurfang.dmgCalc(this.atkPwr), kaelthas));
