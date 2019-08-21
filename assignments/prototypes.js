@@ -74,7 +74,7 @@ Humanoid.prototype.greet = function() {
   return `${this.name} offers a greeting in ${this.language}.`;
 };
 
-Humanoid.prototype.dmgCalc = function(atkPwr) {
+Humanoid.prototype.dmgCalc = function() {
   min = Math.ceil(this.atkPwr - 5);
   max = Math.floor(this.atkPwr + 5);
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -223,14 +223,14 @@ const kaelthas = new Villain({
   atkPwr: 15
 });
 
-console.log(saurfang.mortalStrike(saurfang.dmgCalc(this.atkPwr), kaelthas));
-console.log(kaelthas.pyroBlast(kaelthas.dmgCalc(this.atkPwr), saurfang));
-console.log(saurfang.mortalStrike(saurfang.dmgCalc(this.atkPwr), kaelthas));
-console.log(kaelthas.pyroBlast(kaelthas.dmgCalc(this.atkPwr), saurfang));
-console.log(saurfang.mortalStrike(saurfang.dmgCalc(this.atkPwr), kaelthas));
-console.log(kaelthas.pyroBlast(kaelthas.dmgCalc(this.atkPwr), saurfang));
-console.log(saurfang.mortalStrike(saurfang.dmgCalc(this.atkPwr), kaelthas));
-console.log(kaelthas.pyroBlast(kaelthas.dmgCalc(this.atkPwr), saurfang));
-console.log(saurfang.mortalStrike(saurfang.dmgCalc(this.atkPwr), kaelthas));
-console.log(kaelthas.pyroBlast(kaelthas.dmgCalc(this.atkPwr), saurfang));
-console.log(saurfang.mortalStrike(saurfang.dmgCalc(this.atkPwr), kaelthas));
+console.log(saurfang.mortalStrike(saurfang.dmgCalc(), kaelthas));
+console.log(kaelthas.pyroBlast(kaelthas.dmgCalc(), saurfang));
+console.log(saurfang.mortalStrike(saurfang.dmgCalc(), kaelthas));
+console.log(kaelthas.pyroBlast(kaelthas.dmgCalc(), saurfang));
+console.log(saurfang.mortalStrike(saurfang.dmgCalc(), kaelthas));
+console.log(kaelthas.pyroBlast(kaelthas.dmgCalc(), saurfang));
+console.log(saurfang.mortalStrike(saurfang.dmgCalc(), kaelthas));
+console.log(kaelthas.pyroBlast(kaelthas.dmgCalc(), saurfang));
+console.log(saurfang.mortalStrike(saurfang.dmgCalc(), kaelthas));
+console.log(kaelthas.pyroBlast(kaelthas.dmgCalc(), saurfang));
+console.log(saurfang.mortalStrike(saurfang.dmgCalc(), kaelthas));
