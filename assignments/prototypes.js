@@ -129,5 +129,73 @@ console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 
 // Stretch task:
 // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.
+const Hero = function(attributes) {
+  Humanoid.call(this, attributes);
+};
+Hero.prototype = Object.create(Humanoid.prototype);
+
+const Villain = function(attributes) {
+  Humanoid.call(this, attributes);
+};
+Villain.prototype = Object.create(Humanoid.prototype);
+
 // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
+Hero.prototype.mortalStrike = function(damageDealt, target) {
+  target.healthPoints = target.healthPoints - damageDealt;
+  if (target.healthPoints > 0) {
+    return `You have dealt ${damageDealt} damage points to ${
+      target.name
+    }, remaining health points: ${target.healthPoints}`;
+  } else {
+    return `You have obliterated ${target.name}, bringing great honor to the ${
+      this.team
+    }`;
+  }
+};
+
+Villain.prototype.pyroBlast = function(damageDealt, target) {
+  target.healthPoints = target.healthPoints - damageDealt;
+  if (target.healthPoints > 0) {
+    return `You have dealt ${damageDealt} damage points to ${
+      target.name
+    }, remaining health points: ${target.healthPoints}`;
+  } else {
+    return `You have incinerated ${target.name}, bringing great honor to the ${
+      this.team
+    }`;
+  }
+};
 // * Create two new objects, one a villain and one a hero and fight it out with methods!
+const saurfang = new Hero({
+  createdAt: new Date(),
+  dimensions: {
+    length: 2,
+    width: 2,
+    height: 2
+  },
+  healthPoints: 50,
+  name: "Varok Saurfang",
+  team: "Blackrock Clan",
+  weapons: ["Arcanite Reaper"],
+  language: "Hordish"
+});
+
+const kaelthas = new Villain({
+  createdAt: new Date(),
+  dimensions: {
+    length: 1,
+    width: 2,
+    height: 4
+  },
+  healthPoints: 50,
+  name: "Kael'thas Sunstrider",
+  team: "Sunfury",
+  weapons: ["Felo'melorn"],
+  language: "Elvish"
+});
+
+console.log(saurfang.mortalStrike(10, kaelthas));
+console.log(kaelthas.pyroBlast(15, saurfang));
+console.log(kaelthas.pyroBlast(15, saurfang));
+console.log(kaelthas.pyroBlast(15, saurfang));
+console.log(kaelthas.pyroBlast(15, saurfang));
