@@ -149,6 +149,10 @@ Villain.prototype = Object.create(Humanoid.prototype);
 
 // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
 Hero.prototype.mortalStrike = function(damageDealt, target) {
+  if (this.healthPoints <= 0) {
+    return `You can't attack while dead. Next time don't let your health points reach 0.`;
+  }
+
   target.healthPoints = target.healthPoints - damageDealt;
   if (target.healthPoints > 0) {
     return `You have dealt ${damageDealt} damage points to ${
@@ -162,6 +166,10 @@ Hero.prototype.mortalStrike = function(damageDealt, target) {
 };
 
 Villain.prototype.pyroBlast = function(damageDealt, target) {
+  if (this.healthPoints <= 0) {
+    return `You can't attack while dead. Next time don't let your health points reach 0.`;
+  }
+
   target.healthPoints = target.healthPoints - damageDealt;
   if (target.healthPoints > 0) {
     return `You have dealt ${damageDealt} damage points to ${
@@ -181,7 +189,7 @@ const saurfang = new Hero({
     width: 2,
     height: 2
   },
-  healthPoints: 70,
+  healthPoints: 65,
   name: "Varok Saurfang",
   team: "Blackrock Clan",
   weapons: ["Arcanite Reaper"],
@@ -196,7 +204,7 @@ const kaelthas = new Villain({
     width: 2,
     height: 4
   },
-  healthPoints: 50,
+  healthPoints: 55,
   name: "Kael'thas Sunstrider",
   team: "Sunfury",
   weapons: ["Felo'melorn"],
@@ -204,6 +212,8 @@ const kaelthas = new Villain({
   atkPwr: 15
 });
 
+console.log(saurfang.mortalStrike(saurfang.dmgCalc(this.atkPwr), kaelthas));
+console.log(kaelthas.pyroBlast(kaelthas.dmgCalc(this.atkPwr), saurfang));
 console.log(saurfang.mortalStrike(saurfang.dmgCalc(this.atkPwr), kaelthas));
 console.log(kaelthas.pyroBlast(kaelthas.dmgCalc(this.atkPwr), saurfang));
 console.log(saurfang.mortalStrike(saurfang.dmgCalc(this.atkPwr), kaelthas));
